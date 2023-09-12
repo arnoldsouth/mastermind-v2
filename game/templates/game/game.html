@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_content %}
+
+<h1>
+    <a href="{% url 'home' %}" class="">
+        Mastermind Game
+    </a>
+</h1>
+
+<h4>Game Rules</h4>
+<div>
+    <ul>
+        <li>At the start of the game the computer will randomly select a pattern of four different numbers from a total of 8
+            different numbers (0-7).</li>
+        <li>A player will have 10 attempts to guess the number combinations</li>
+        <li>At the end of each guess, computer will provide one of the following response as feedback:</li>
+        <ul>
+            <li>The player had guess a correct number</li>
+            <li>The player had guessed a correct number and its correct location</li>
+            <li>The player’s guess was incorrect</li>
+        </ul>
+    </ul>
+</div>
+
+<br>
+
+
+<h5>Attempts remaining: {{ attempts }}</h5>
+
+<form method="post" action="{% url 'play_game' %}" class="row g-2">
+    {% csrf_token %}
+    <div class="col-auto">
+    <input type="text" name="guess" maxlength="4" class="form-control" required>
+    </div>
+    <div class="col-auto">
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+
+
+<h6>Feedback: </h6>
+<ul class="list-group list-group-flush list-group-numbered">
+    {% for feedback in feedback_history %}
+    <li class="list-group-item">{{ feedback|join:" ⏤ " }}</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

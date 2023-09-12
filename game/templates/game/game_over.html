@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+<h1 class="text-center">{% if win %} Winner! 🫡 {% else %} Loser 😔 {% endif %}</h1>
+
+<hr>
+
+<h1 class="text-center">{{ combination|join:" " }}</h1>
+
+<hr>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h4>Guess History</h4>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Guess</th>
+                        <th>Feedback</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for guess, feedback in feedback_history %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ guess|join:" " }}</td>
+                        <td>{{ feedback }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+            <!-- {% if win or attempts == 0 %}
+            <div class="text-center">
+                <form method="post" action="{% url 'play_game' %}">
+                    {% csrf_token %}
+                    <input type="submit" name="new_game" value="New Game" class="btn btn-primary">
+                </form>
+            </div>
+            {% endif %} -->
+
+            {% if win or not win or attempts == 0 %}
+            <div class="text-center">
+                <form method="post" action="{% url 'play_game' %}">
+                    {% csrf_token %}
+                    <input type="submit" name="new_game" value="New Game" class="btn btn-primary">
+                </form>
+            </div>
+            {% endif %}
+
+            <!-- {% if not win or attempts == 0 %}
+            <div class="text-center">
+                <form method="post" action="{% url 'play_game' %}">
+                    {% csrf_token %}
+                    <input type="submit" name="new_game" value="New Game" class="btn btn-primary">
+                </form>
+            </div>
+            {% endif %} -->
+        </div>
+    </div>
+</div>
+{% endblock %}
