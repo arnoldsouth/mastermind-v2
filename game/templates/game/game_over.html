@@ -3,17 +3,18 @@
 {% block page_content %}
 <h1 class="text-center">{% if win %} Winner! 🫡 {% else %} Loser 😔 {% endif %}</h1>
 
+<h6 class="text-center">Total Game Time: {{ total_seconds }} seconds</h6>
+
+<h2 class="text-center">Combination: {{ combination|join:" " }}</h2>
+
 <hr>
 
-<h1 class="text-center">{{ combination|join:" " }}</h1>
-
-<hr>
 
 
 <div class="container">
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <h4>Guess History</h4>
+            <h4 class="text-center">Guess History</h4>
             <table class="table table-striped">
                 <thead>
                     <tr>

@@ -25,6 +25,7 @@ def play_game(request):
     if not combination:
         combination = generate_combination()
         request.session["combination"] = combination
+        request.session["start_time"] = timezone.now().timestamp()
 
     if request.method == "POST":
         guess = [int(num) for num in request.POST["guess"]]
@@ -77,10 +78,16 @@ def play_game(request):
             request.session["attempts"] = attempts
 
         if win or attempts == 0:
+            end_time = timezone.now().timestamp()
+            total_seconds = end_time - request.session.get(
+                "start_time", end_time
+            )
+
             context = {
                 "win": win,
                 "combination": combination,
                 "feedback_history": feedback_history,
+                "total_seconds": round(total_seconds),
             }
             return render(request, "game/game_over.html", context)
 
