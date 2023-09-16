@@ -32,21 +32,6 @@ def play_game(request):
         correct_nums = 0
         correct_positions = 0
 
-        # matched_combination_indices = set()
-
-        # for i, num in enumerate(guess):
-        #     if num == combination[i]:
-        #         correct_positions += 1
-        #         correct_nums += 1
-        #         matched_combination_indices.add(i)
-
-        # for i, num in enumerate(guess):
-        #     if num in combination and i not in matched_combination_indices:
-        #         position = combination.index(num)
-        #         if position not in matched_combination_indices:
-        #             correct_nums += 1
-        #             matched_combination_indices.add(position)
-
         matched_combination_indices = set()
         matched_guess_indices = set()
 

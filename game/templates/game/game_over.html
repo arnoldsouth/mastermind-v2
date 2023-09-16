@@ -34,14 +34,7 @@
                 </tbody>
             </table>
             
-            <!-- {% if win or attempts == 0 %}
-            <div class="text-center">
-                <form method="post" action="{% url 'play_game' %}">
-                    {% csrf_token %}
-                    <input type="submit" name="new_game" value="New Game" class="btn btn-primary">
-                </form>
-            </div>
-            {% endif %} -->
+            
 
             {% if win or not win or attempts == 0 %}
             <div class="text-center">
@@ -52,14 +45,7 @@
             </div>
             {% endif %}
 
-            <!-- {% if not win or attempts == 0 %}
-            <div class="text-center">
-                <form method="post" action="{% url 'play_game' %}">
-                    {% csrf_token %}
-                    <input type="submit" name="new_game" value="New Game" class="btn btn-primary">
-                </form>
-            </div>
-            {% endif %} -->
+            
         </div>
     </div>
 </div>
