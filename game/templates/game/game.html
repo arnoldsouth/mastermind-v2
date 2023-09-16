@@ -9,6 +9,7 @@
 </h1>
 
 <h4>Game Rules</h4>
+
 <div>
     <ul>
         <li>At the start of the game the computer will randomly select a pattern of four different numbers from a total of 8
@@ -31,7 +32,7 @@
 <form method="post" action="{% url 'play_game' %}" class="row g-2">
     {% csrf_token %}
     <div class="col-auto">
-    <input type="text" name="guess" maxlength="4" class="form-control" required>
+    <input type="text" name="guess" maxlength="4" class="form-control" autocomplete="off" required>
     </div>
     <div class="col-auto">
     <button type="submit" class="btn btn-primary">Submit</button>
