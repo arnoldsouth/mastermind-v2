@@ -9,19 +9,21 @@
     <!-- zip() to combine two or more iterables -->
     {% for game in games %}
     <li>
-        Combination: {{ game.combination }}
         {% if game.win %}
-        (Win)
+        Won
         {% else %}
-        (Lose)
+        Lost
         {% endif %}
+        <br/>
+        Combination: {{ game.combination }}
+
 
         <br>
 
         Feedback History:
         <ul>
             {% for feedback in game.feedback_history %}
-            <li>{{ feedback }}</li>
+            <li>{{ feedback|join:" " }}</li>
             {% endfor %}
         </ul>
     </li>

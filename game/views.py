@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import redirect, render
 from django.db import models, IntegrityError
 from django.utils import timezone
@@ -64,8 +65,14 @@ def play_game(request):
 
         if win or attempts == 0:
             end_time = timezone.now().timestamp()
-            total_seconds = end_time - request.session.get(
-                "start_time", end_time
+            total_seconds = end_time - request.session.get("start_time", end_time)
+
+            # Serialize the feedback_history before saving
+            feedback_history_str = json.dumps(feedback_history)  # <--- Serialization
+
+            # Save the game session to the database
+            Game.objects.create(
+                combination=combination, win=win, feedback_history=feedback_history_str
             )
 
             context = {
@@ -85,7 +92,16 @@ def play_game(request):
 
 
 def game_history(request):
-    games = Game.objects.all()
+    # When retrieving from the database
+    # games = Game.objects.all()
+    games = Game.objects.all().order_by("-id")[:10]  # Fetch the 10 most recent games
+
+    # Deserialize feedback_history for each game
+    for game in games:
+        game.feedback_history = json.loads(
+            game.feedback_history
+        )  # <--- Deserialization
+
     context = {
         "games": games,
     }
