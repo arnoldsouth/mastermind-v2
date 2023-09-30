@@ -16,9 +16,9 @@ params = {
 def generate_combination():
     response = requests.get(API_URL, params=params)
     data = response.text.split()
-    print(data)
+    # print(f"data: {data}")
 
     combination = [int(num) for num in data]
-    print(combination)  # [0, 1, 2, 3]
+    print(f"combination: {combination}")  # [0, 1, 2, 3]
 
     return combination
